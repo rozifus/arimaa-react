@@ -1,6 +1,7 @@
 
-var React = require('react'),
-    Piece = require('./Piece.react');
+var React     = require('react'),
+    Piece     = require('./Piece.react'),
+    BoardData = require('./Board.data');
 
 var style = {
   width  : "100%",
@@ -11,10 +12,26 @@ var style = {
 
 var Square = React.createClass({
 
+  propTypes: {
+    row    : React.PropTypes.number.isRequired,
+    column : React.PropTypes.number.isRequired,
+  },
+
+  getInitialState: function() {
+
+    var animal = BoardData.DefaultLayout[this.props.row][this.props.column];
+
+    return {
+      piece: animal ? <Piece animal={animal} /> : null
+    }
+
+  },
+
   render: function() {
+
     return(
       <div style={style} className="column two wide game-square">
-        <Piece animal="e"/>
+        {this.state.piece}
       </div>
     );
   },

@@ -8,23 +8,39 @@ var style = {
   border: "1px solid black",
 };
 
+var rowStyle = {
+  padding: 0,
+}
+
 var Board = React.createClass({
 
   getInitialState: function() {
 
-    var rows = [];
+    var squares = [];
     for (var ri=0; ri<8; ri++) {
-      rows.push(<Row key={ri}/>);
+      var row = [];
+      for (var ci=0; ci<8; ci++) {
+        row.push(<Square row={ri} column={ci} />)
+      }
+      squares.push(row);
     }
-    return {rows: rows}
+    return {squares: squares}
 
   },
 
   render: function() {
 
+    var rows = this.state.squares.map(function(row) {
+      return(
+        <div style={rowStyle} className="row">
+          {row}
+        </div>
+      )
+    });
+
     return(
       <div style={style} className="ui grid">
-        {this.state.rows}
+        {rows}
       </div>
     );
   },
