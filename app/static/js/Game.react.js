@@ -2,6 +2,7 @@
 var React    = require('react'),
     Stub     = require('./Stub.react'),
     Controls = require('./Controls.react'),
+    OuterBoard   = require('./OuterBoard.react'),
     Board    = require('./Board.react');
 
 var Game = React.createClass({
@@ -10,13 +11,13 @@ var Game = React.createClass({
     return(
       <div className="ui grid">
         <div className="row">
-          <div className="three wide column">
+          <div className="four wide column">
             <Stub>Controls</Stub>
           </div>
-          <div className="ten wide column">
-            <Board />
+          <div className="eight wide column">
+            <OuterBoard />
           </div>
-          <div className="three wide column">
+          <div className="four wide column">
             <Stub>Turns</Stub>
           </div>
         </div>

@@ -2,12 +2,16 @@
 var React  = require('react'),
     Square = require('./Square.react');
 
-var Board = React.createClass({
+var style = {
+  padding: 0
+}
+
+var Row = React.createClass({
 
   getInitialState: function() {
 
     var squares = [];
-    for (var si=0; si<4; si++) {
+    for (var si=0; si<8; si++) {
         squares.push(<Square key={si}/>);
     };
     return {squares: squares}
@@ -17,7 +21,7 @@ var Board = React.createClass({
   render: function() {
 
     return(
-      <div className="row">
+      <div style={style} className="row">
         {this.state.squares}
       </div>
     );
@@ -26,5 +30,5 @@ var Board = React.createClass({
 
 });
 
-module.exports = Board;
+module.exports = Row;
 
