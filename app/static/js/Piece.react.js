@@ -1,6 +1,7 @@
 
-var React       = require('react'),
-    PieceData   = require('./Piece.data');
+var React      = require('react');
+var ThemeStore = require('./Theme.dispatcher');
+var PieceData  = require('./Piece.data');
 
 var style = {
   width  : "80%",
@@ -17,6 +18,14 @@ var Piece = React.createClass({
 
   propTypes: {
     animal: React.PropTypes.string.isRequired,
+  },
+
+  componentDidMount: function() {
+    ThemeStore.addChangeListener(this._onChange);
+  },
+
+  componentWillUnmount: function() {
+    Themestore.removeChangeListener(this._onChange);
   },
 
   render: function() {

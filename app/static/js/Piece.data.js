@@ -1,26 +1,37 @@
 
-var img_base = "/static/res/gfx/40x40-gs/",
+var img_base = "/static/res/gfx/40x40",
     img_ext  = ".svg"
 
-var image_names = {
-  E: "g-1-elephant",
-  M: "g-2-camel",
-  H: "g-3-horse",
-  D: "g-4-dog",
-  C: "g-5-cat",
-  R: "g-6-rabbit",
+var animal_path = {
+  E: "1-elephant",
+  M: "2-camel",
+  H: "3-horse",
+  D: "4-dog",
+  C: "5-cat",
+  R: "6-rabbit",
 
-  e: "s-1-elephant",
-  m: "s-2-camel",
-  h: "s-3-horse",
-  d: "s-4-dog",
-  c: "s-5-cat",
-  r: "s-6-rabbit",
+  e: "1-elephant",
+  m: "2-camel",
+  h: "3-horse",
+  d: "4-dog",
+  c: "5-cat",
+  r: "6-rabbit",
+}
+
+var color_path = {
+  g: '-gs/g-',
+  s: '-gs/s-',
+  b: '-bw/b-',
+  w: '-bw/w-',
 }
 
 var Images = {}
 for (var key in image_names) {
   Images[key] = img_base + image_names[key] + img_ext;
+}
+
+var getImgSrc = function(colorSet, team, animal) {
+
 }
 
 module.exports = {
