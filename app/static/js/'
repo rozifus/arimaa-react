@@ -1,0 +1,52 @@
+
+var React      = require('react');
+var ThemeStore = require('./Theme.dispatcher');
+
+var style = {
+  width  : "80%",
+  height : "80%",
+  position: "absolute",
+  margin: "auto",
+  top: 0,
+  left: 0,
+  right: 0,
+  bottom: 0,
+};
+
+function getStateFromStores() {
+  return {
+    img_src: ThemeStore.getImg
+  }
+}
+
+var Piece = React.createClass({
+
+  propTypes: {
+    animal: React.PropTypes.string.isRequired,
+    player: React.PropTyles.string.isRequired,
+  },
+
+  getInitialState: function({
+
+  })
+
+  componentDidMount: function() {
+    ThemeStore.addChangeListener(this._onChange);
+  },
+
+  componentWillUnmount: function() {
+    Themestore.removeChangeListener(this._onChange);
+  },
+
+  render: function() {
+
+    var image_src = ;
+    return(
+      <img style={style} className="ui image" src={image_src} />
+    );
+  },
+
+});
+
+module.exports = Piece;
+

@@ -1,7 +1,6 @@
 
 var React      = require('react');
-var ThemeStore = require('./Theme.dispatcher');
-var PieceData  = require('./Piece.data');
+var ThemeStore = require('./Theme.store');
 
 var style = {
   width  : "80%",
@@ -16,8 +15,20 @@ var style = {
 
 var Piece = React.createClass({
 
+  getStateFromStores: function() {
+    return {
+      img_src: ThemeStore.getPieceImgSrc( this.props.player,
+                                          this.props.animal )
+    };
+  },
+
   propTypes: {
     animal: React.PropTypes.string.isRequired,
+    player: React.PropTypes.string.isRequired,
+  },
+
+  getInitialState: function() {
+    return this.getStateFromStores();
   },
 
   componentDidMount: function() {
@@ -30,10 +41,13 @@ var Piece = React.createClass({
 
   render: function() {
 
-    var image_src = PieceData.Images[this.props.animal];
     return(
-      <img style={style} className="ui image" src={image_src} />
+      <img style={style} className="ui image" src={this.state.img_src} />
     );
+  },
+
+  _onChange: function() {
+    this.setState(this.getStateFromStores());
   },
 
 });

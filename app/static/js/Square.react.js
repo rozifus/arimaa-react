@@ -20,9 +20,10 @@ var Square = React.createClass({
   getInitialState: function() {
 
     var animal = BoardData.DefaultLayout[this.props.row][this.props.column];
+    var player = ((animal.toUpperCase() == animal) ? "ONE" : "TWO")
 
     return {
-      piece: animal ? <Piece animal={animal} /> : null
+      piece: animal ? <Piece animal={animal} player={player}/> : null
     }
 
   },

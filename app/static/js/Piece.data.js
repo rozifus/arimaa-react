@@ -1,5 +1,7 @@
 
-var img_base = "/static/res/gfx/40x40",
+var keyMirror = require('keymirror');
+
+var img_src_base = "/static/res/gfx/40x40",
     img_ext  = ".svg"
 
 var animal_path = {
@@ -24,6 +26,11 @@ var color_path = {
   b: '-bw/b-',
   w: '-bw/w-',
 }
+
+var Players = keyMirror({
+  ONE: null,
+  TWO: null,
+})
 
 var Images = {}
 for (var key in image_names) {
