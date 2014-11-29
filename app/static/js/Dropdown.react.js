@@ -3,21 +3,34 @@ var React = require('react');
 
 var Dropdown = React.createClass({
 
+  componentDidMount: function() {
+    this.activateDropdown();
+  },
+
+  activateDropdown: function() {
+    $(this.getDOMNode()).dropdown({
+      onChange: this.props.onChange
+    });
+    console.log(this.props.selected);
+    //$(this.getDOMNode()).dropdown("set value", this.props.selected)
+  },
+
   render: function() {
 
     return(
-      <div class="ui selection dropdown">
-        <div className="default text">{this.props.defaultText}</div>
-        <div class="menu">
-          {this.props.data.map(function(datum) {
-            return( <div class="item" data-value={datum.value}>
-                      {datum.text}
-                    </div>
-            )
-          })}
-        </div>
-      </div>
+      <select className="ui dropdown">
+        {this.props.defaultText ? null :
+              <option value="">this.props.defaultText</option>
+        }
+        {this.props.data.map(function(datum) {
+          return( <option key={datum.key} value={datum.key}>
+                    {datum.text}
+                  </option>
+          )
+        })}
+      </select>
     );
+
   },
 
 });

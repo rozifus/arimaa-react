@@ -12,7 +12,7 @@ var Game = React.createClass({
       <div className="ui grid">
         <div className="row">
           <div className="four wide column">
-            <Stub>Controls</Stub>
+            <Controls />
           </div>
           <div className="eight wide column">
             <OuterBoard />

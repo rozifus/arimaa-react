@@ -26,6 +26,10 @@ var ThemeStore = assign({}, EventEmitter.prototype, {
     this.removeListener(CHANGE_EVENT, callback)
   },
 
+  getColorSet: function() {
+    return _colorSet;
+  },
+
   getColorSetList: function() {
     return Object.keys(ColorSets).map(function(cs) {
       return {

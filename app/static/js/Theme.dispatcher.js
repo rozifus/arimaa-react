@@ -6,7 +6,7 @@ var assign     = require('object-assign');
 var ThemeDispatcher = assign(new Dispatcher(), {
   handleViewAction: function(action) {
     var payload = {
-      source: PayloadSources.VIEW_ACTION,
+      //source: PayloadSources.VIEW_ACTION,
       action: action
     };
     this.dispatch(payload);
