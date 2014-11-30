@@ -1,8 +1,8 @@
 
 var React = require('react');
 var Dropdown = require('./Dropdown.react');
-var ThemeStore = require('./Theme.store');
-var ThemeActioner = require('./Theme.actioner');
+var ThemeStore = require('../Fluxers/Theme.store');
+var ThemeActioner = require('../Fluxers/Theme.actioner');
 
 var Component = React.createClass({
 

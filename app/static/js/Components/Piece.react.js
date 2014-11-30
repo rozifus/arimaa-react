@@ -1,6 +1,6 @@
 
 var React      = require('react');
-var ThemeStore = require('./Theme.store');
+var ThemeStore = require('../Fluxers/Theme.store');
 
 var style = {
   width  : "80%",

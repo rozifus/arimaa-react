@@ -1,7 +1,7 @@
 
 
 var React = require('react'),
-    App   = require('./App.react');
+    App   = require('./Components/App.react');
 
 React.render(
   <App/>,

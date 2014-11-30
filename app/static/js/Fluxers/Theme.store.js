@@ -6,7 +6,7 @@ var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
 
 var ColorSets = ThemeConstants.ColorSets;
-var ColorSetNames = ThemeConstants.ColorSetNames;
+var ColorSetData = ThemeConstants.ColorSetData;
 var ActionTypes = ThemeConstants.ActionTypes;
 var CHANGE_EVENT = 'change';
 
@@ -34,18 +34,19 @@ var ThemeStore = assign({}, EventEmitter.prototype, {
     return Object.keys(ColorSets).map(function(cs) {
       return {
         key: cs,
-        text: ColorSetNames[cs],
+        text: ColorSetData[cs].name,
       };
     });
   },
 
   getPieceImgSrc: function(player, animal) {
+    console.log
 
     return ThemeConstants.GFX_BASE +
-           ThemeConstants.ColorSetPaths[_colorSet] +
-           ThemeConstants.PlayerPaths[player] +
-           ThemeConstants.AnimalPaths[animal] +
-           ThemeConstants.ColorSetExts[_colorSet];
+           ThemeConstants.ColorSetData[_colorSet].path +
+           ThemeConstants.PlayerData[player].path +
+           ThemeConstants.AnimalData[animal].path +
+           ThemeConstants.ColorSetData[_colorSet].ext;
 
   },
 

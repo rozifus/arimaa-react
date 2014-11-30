@@ -1,7 +1,7 @@
 
 var React     = require('react'),
     Piece     = require('./Piece.react'),
-    BoardData = require('./Board.data');
+    BoardData = require('../Fluxers/Board.data');
 
 var style = {
   width  : "100%",
@@ -20,7 +20,7 @@ var Square = React.createClass({
   getInitialState: function() {
 
     var animal = BoardData.DefaultLayout[this.props.row][this.props.column];
-    var player = ((animal.toUpperCase() == animal) ? "ONE" : "TWO")
+    var player = (this.props.row < 4 ? "ONE" : "TWO")
 
     return {
       piece: animal ? <Piece animal={animal} player={player}/> : null
