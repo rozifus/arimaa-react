@@ -97,7 +97,6 @@ module.exports = {
     PieceTypeData: PieceTypeData,
     PieceTypes: PieceTypes,
 
-
 };
 
 

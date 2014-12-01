@@ -12,7 +12,7 @@ var ColorSetData = GameConstants.ColorSetData;
 var ActionTypes = GameConstants.ActionTypes;
 var CHANGE_EVENT = 'change';
 
-var _board = BoardData.getDefaultLayout();
+var _board = null;
 var _turns = [];
 var _turn = [];
 
@@ -35,7 +35,6 @@ var GameStore = assign({}, EventEmitter.prototype, {
   },
 
   getPieceAt: function(row, column) {
-    console.log(_board)
     return (_board && _board[row] && _board[row][column]) || null;
   },
 

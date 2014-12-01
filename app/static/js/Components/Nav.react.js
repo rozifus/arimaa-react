@@ -1,5 +1,7 @@
 
 var React = require('react');
+var Link  = require('./Link.react');
+var GameActioner = require('../Fluxers/Game.actioner');
 
 module.exports = React.createClass({
 
@@ -14,7 +16,7 @@ module.exports = React.createClass({
             </div>
             <div className="ui item">
               <div className="ui inverted menu">
-                <a className="item">New Game</a>
+                <Link className="item" onClick={this._handleNewGame} text="New Game" />
                 <a className="item">Stats</a>
               </div>
             </div>
@@ -22,7 +24,11 @@ module.exports = React.createClass({
         </div>
       </div>
     )
+  },
 
-  }
+  _handleNewGame: function() {
+    console.log("handle newgame")
+    GameActioner.newGame();
+  },
 
 });
