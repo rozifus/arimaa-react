@@ -19,32 +19,32 @@ var ColorSetData = {
 var ColorSets = keyMirror(ColorSetData);
 
 var AnimalData = {
-  E: {
+  ELEPHANT: {
     name: 'Elephant',
     code: 'e',
     path: '1-elephant',
   },
-  M: {
+  CAMEL: {
     name: 'Camel',
     code: 'm',
     path: '2-camel',
   },
-  H: {
+  HORSE: {
     name: 'Horse',
     code: 'h',
     path: '3-horse',
   },
-  D: {
+  DOG: {
     name: 'Dog',
     code: 'd',
     path: '4-dog',
   },
-  C: {
+  CAT: {
     name: 'Cat',
     code: 'c',
     path: '5-cat',
   },
-  R: {
+  RABBIT: {
     name: 'Rabbit',
     code: 'r',
     path: '6-rabbit',
@@ -64,6 +64,21 @@ var PlayerData = {
 
 var Players = keyMirror(PlayerData)
 
+PieceTypeData = {};
+
+Object.keys(Animals).map(function(animal) {
+  PieceTypeData[AnimalData[animal].code.toUpperCase()] = {
+    animal: animal,
+    player: Players.ONE
+  };
+  PieceTypeData[AnimalData[animal].code.toLowerCase()] = {
+    animal: animal,
+    player: Players.TWO
+  };
+});
+
+var PieceTypes = keyMirror(PieceTypeData);
+
 var ActionTypes = keyMirror({
   SET_COLORSET: null,
 });
@@ -79,6 +94,9 @@ module.exports = {
     ColorSetData: ColorSetData,
     PlayerData: PlayerData,
     Players: Players,
+    PieceTypeData: PieceTypeData,
+    PieceTypes: PieceTypes,
+
 
 };
 

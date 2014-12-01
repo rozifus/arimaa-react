@@ -15,16 +15,8 @@ var style = {
 
 var Piece = React.createClass({
 
-  getStateFromStores: function() {
-    return {
-      img_src: ThemeStore.getPieceImgSrc( this.props.player,
-                                          this.props.animal )
-    };
-  },
-
   propTypes: {
-    animal: React.PropTypes.string.isRequired,
-    player: React.PropTypes.string.isRequired,
+    pieceType: React.PropTypes.string.isRequired,
   },
 
   getInitialState: function() {
@@ -49,6 +41,13 @@ var Piece = React.createClass({
   _onChange: function() {
     this.setState(this.getStateFromStores());
   },
+
+  getStateFromStores: function() {
+    return {
+      img_src: ThemeStore.getPieceImgSrc( this.props.pieceType )
+    };
+  },
+
 
 });
 

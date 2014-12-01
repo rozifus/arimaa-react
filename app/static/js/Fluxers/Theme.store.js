@@ -39,8 +39,11 @@ var ThemeStore = assign({}, EventEmitter.prototype, {
     });
   },
 
-  getPieceImgSrc: function(player, animal) {
-    console.log
+  getPieceImgSrc: function(pieceType) {
+
+    var pieceTypeData = ThemeConstants.PieceTypeData[pieceType],
+        player        = pieceTypeData.player,
+        animal        = pieceTypeData.animal;
 
     return ThemeConstants.GFX_BASE +
            ThemeConstants.ColorSetData[_colorSet].path +

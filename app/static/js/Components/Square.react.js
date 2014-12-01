@@ -1,7 +1,7 @@
 
-var React     = require('react'),
-    Piece     = require('./Piece.react'),
-    BoardData = require('../Fluxers/Board.data');
+var React           = require('react'),
+    Piece           = require('./Piece.react'),
+    GameStore       = require('../Fluxers/Game.store');
 
 var style = {
   width  : "100%",
@@ -18,24 +18,37 @@ var Square = React.createClass({
   },
 
   getInitialState: function() {
+    return this.getStateFromStores();
+  },
 
-    var animal = BoardData.DefaultLayout[this.props.row][this.props.column];
-    var player = (this.props.row < 4 ? "ONE" : "TWO")
+  componentDidMount: function() {
+    GameStore.addChangeListener(this._onChange);
+  },
 
-    return {
-      piece: animal ? <Piece animal={animal} player={player}/> : null
-    }
-
+  componentWillUnmount: function() {
+    GameStore.removeChangeListener(this._onChange);
   },
 
   render: function() {
 
+    var piece = this.state.pieceType ? <Piece pieceType={this.state.pieceType}/> : null;
+
     return(
       <div style={style} className="column two wide game-square">
-        {this.state.piece}
+        {piece}
       </div>
     );
   },
+
+  _onChange: function() {
+    this.setState(this.getStateFromStores());
+  },
+
+  getStateFromStores: function() {
+    return {
+      pieceType: GameStore.getPieceAt(this.props.row, this.props.column)
+    }
+  }
 
 });
 
