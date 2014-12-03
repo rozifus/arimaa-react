@@ -1,7 +1,7 @@
 
 var React = require('react');
 var Link  = require('./Link.react');
-var GameActioner = require('../Fluxers/Game.actioner');
+var GameActions = require('../actions/Game.actions');
 
 module.exports = React.createClass({
 
@@ -28,7 +28,7 @@ module.exports = React.createClass({
 
   _handleNewGame: function() {
     console.log("handle newgame")
-    GameActioner.newGame();
+    GameActions.newGame();
   },
 
 });

@@ -1,7 +1,7 @@
 
 var React           = require('react'),
     Piece           = require('./Piece.react'),
-    GameStore       = require('../Fluxers/Game.store');
+    GameStore       = require('../stores/Game.store');
 
 var style = {
   width  : "100%",

@@ -1,20 +1,20 @@
 
 
-var GameDispatcher = require('./Game.dispatcher');
-var GameConstants = require('./Game.constants');
-var ThemeConstants = require('./Theme.constants');
-var EventEmitter = require('events').EventEmitter;
-var assign = require('object-assign');
-var BoardData = require('./Board.data')
+var assign         = require('object-assign');
+var EventEmitter   = require('events').EventEmitter;
+var GameDispatcher = require('../dispatcher/Game.dispatcher');
+var GameConstants  = require('../constants/Game.constants');
+var ThemeConstants = require('../constants/Theme.constants');
+var BoardData      = require('../data/Board.data')
 
-var ColorSets = GameConstants.ColorSets;
+var ColorSets    = GameConstants.ColorSets;
 var ColorSetData = GameConstants.ColorSetData;
-var ActionTypes = GameConstants.ActionTypes;
+var ActionTypes  = GameConstants.ActionTypes;
 var CHANGE_EVENT = 'change';
 
 var _board = null;
 var _turns = [];
-var _turn = [];
+var _turn  = [];
 
 var GameStore = assign({}, EventEmitter.prototype, {
 

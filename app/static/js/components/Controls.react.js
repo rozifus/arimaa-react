@@ -1,14 +1,14 @@
 
 var React = require('react');
 var Dropdown = require('./Dropdown.react');
-var ThemeStore = require('../Fluxers/Theme.store');
-var ThemeActioner = require('../Fluxers/Theme.actioner');
+var ThemeStore = require('../stores/Theme.store');
+var ThemeActions = require('../actions/Theme.actions');
 
 var Component = React.createClass({
 
 
   onChangeColorSet: function(event, value) {
-    ThemeActioner.setColorSet(event)
+    ThemeActions.setColorSet(event)
   },
 
   render: function() {

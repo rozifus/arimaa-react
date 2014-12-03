@@ -1,8 +1,8 @@
 
 
-var GameDispatcher = require('./Game.dispatcher');
-var GameConstants = require('./Game.constants');
-var GameStore = require('./Game.store');
+var GameDispatcher = require('../dispatcher/Game.dispatcher');
+var GameConstants  = require('../constants/Game.constants');
+var GameStore      = require('../stores/Game.store');
 
 var ActionTypes = GameConstants.ActionTypes;
 

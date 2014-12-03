@@ -1,8 +1,8 @@
 
 
-var ThemeDispatcher = require('./Theme.dispatcher');
-var ThemeConstants = require('./Theme.constants');
-var ThemeStore = require('./Theme.store');
+var ThemeDispatcher = require('../dispatcher/Theme.dispatcher');
+var ThemeConstants  = require('../constants/Theme.constants');
+var ThemeStore      = require('../stores/Theme.store');
 
 var ActionTypes = ThemeConstants.ActionTypes;
 

@@ -1,13 +1,14 @@
 
 
-var ThemeDispatcher = require('./Theme.dispatcher');
-var ThemeConstants = require('./Theme.constants');
+var assign       = require('object-assign');
 var EventEmitter = require('events').EventEmitter;
-var assign = require('object-assign');
 
-var ColorSets = ThemeConstants.ColorSets;
+var ThemeDispatcher = require('../dispatcher/Theme.dispatcher');
+var ThemeConstants  = require('../constants/Theme.constants');
+
+var ColorSets    = ThemeConstants.ColorSets;
 var ColorSetData = ThemeConstants.ColorSetData;
-var ActionTypes = ThemeConstants.ActionTypes;
+var ActionTypes  = ThemeConstants.ActionTypes;
 var CHANGE_EVENT = 'change';
 
 var _colorSet = ColorSets.GOLD_SILVER;
