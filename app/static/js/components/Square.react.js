@@ -31,7 +31,7 @@ var Square = React.createClass({
 
   render: function() {
 
-    var piece = this.state.pieceType ? <Piece pieceType={this.state.pieceType}/> : null;
+    var piece = (this.state.pieceCode != false) ? <Piece pieceCode={this.state.pieceCode}/> : null;
 
     return(
       <div style={style} className="column two wide game-square">
@@ -46,7 +46,7 @@ var Square = React.createClass({
 
   getStateFromStores: function() {
     return {
-      pieceType: GameStore.getPieceAt(this.props.row, this.props.column)
+      pieceCode: GameStore.getPieceAt(this.props.row, this.props.column)
     }
   }
 

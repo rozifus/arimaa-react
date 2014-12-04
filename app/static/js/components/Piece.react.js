@@ -16,7 +16,7 @@ var style = {
 var Piece = React.createClass({
 
   propTypes: {
-    pieceType: React.PropTypes.string.isRequired,
+    pieceCode: React.PropTypes.string.isRequired,
   },
 
   getInitialState: function() {
@@ -44,7 +44,7 @@ var Piece = React.createClass({
 
   getStateFromStores: function() {
     return {
-      img_src: ThemeStore.getPieceImgSrc( this.props.pieceType )
+      img_src: ThemeStore.getPieceImgSrc( this.props.pieceCode )
     };
   },
 

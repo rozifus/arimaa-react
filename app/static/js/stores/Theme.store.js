@@ -40,9 +40,9 @@ var ThemeStore = assign({}, EventEmitter.prototype, {
     });
   },
 
-  getPieceImgSrc: function(pieceType) {
+  getPieceImgSrc: function(pieceCode) {
 
-    var pieceTypeData = ThemeConstants.PieceTypeData[pieceType],
+    var pieceTypeData = ThemeConstants.PieceTypeData[pieceCode],
         player        = pieceTypeData.player,
         animal        = pieceTypeData.animal;
 
@@ -53,6 +53,7 @@ var ThemeStore = assign({}, EventEmitter.prototype, {
            ThemeConstants.ColorSetData[_colorSet].ext;
 
   },
+
 
 });
 
@@ -67,6 +68,8 @@ ThemeStore.DespatchToken = ThemeDispatcher.register(function(payload) {
   }
 
 });
+
+ThemeStore.setMaxListeners(48);
 
 module.exports = ThemeStore;
 

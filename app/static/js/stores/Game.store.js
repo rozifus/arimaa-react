@@ -4,17 +4,16 @@ var assign         = require('object-assign');
 var EventEmitter   = require('events').EventEmitter;
 var GameDispatcher = require('../dispatcher/Game.dispatcher');
 var GameConstants  = require('../constants/Game.constants');
-var ThemeConstants = require('../constants/Theme.constants');
-var BoardData      = require('../data/Board.data')
 
-var ColorSets    = GameConstants.ColorSets;
-var ColorSetData = GameConstants.ColorSetData;
-var ActionTypes  = GameConstants.ActionTypes;
-var CHANGE_EVENT = 'change';
+var LocalEngine    = require('../engine/Local.engine');
 
-var _board = null;
-var _turns = [];
-var _turn  = [];
+var ActionTypes    = GameConstants.ActionTypes;
+var CHANGE_EVENT   = 'change';
+
+var BoardData      = require('../data/Board.data');
+
+var _engine = null;
+var _board = [];
 
 var GameStore = assign({}, EventEmitter.prototype, {
 
@@ -35,12 +34,13 @@ var GameStore = assign({}, EventEmitter.prototype, {
   },
 
   getPieceAt: function(row, column) {
-    return (_board && _board[row] && _board[row][column]) || null;
+    return (_board && _board[row] && _board[row][column]) || " ";
   },
 
   getPieceTypeData: function(pieceType) {
     return ThemeConstants.pieceTypeData[pieceType];
   },
+
 
 });
 
@@ -48,11 +48,22 @@ GameStore.DespatchToken = GameDispatcher.register(function(payload) {
   var action = payload.action;
 
   switch(action.type) {
-    case ActionTypes.NEW_GAME:
-      _board = BoardData.getDefaultLayout();
+    case ActionTypes.RECEIVE_BOARD:
       GameStore.emitChange();
       break;
-  }
+
+    case ActionTypes.NEW_GAME:
+      _engine = LocalEngine;
+      _engine.newGame();
+      _board = _engine.getBoard();
+      GameStore.emitChange();
+      break;
+
+    case ActionTypes.MAKE_TURN:
+      var turn = action.turn;
+      _engine && _engine.processTurn(turn);
+      break;
+  };
 
 });
 

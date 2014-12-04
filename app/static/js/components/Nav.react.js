@@ -28,7 +28,7 @@ module.exports = React.createClass({
 
   _handleNewGame: function() {
     console.log("handle newgame")
-    GameActions.newGame();
+    GameActions.requestNewGame();
   },
 
 });
