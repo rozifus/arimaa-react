@@ -10,7 +10,9 @@ var GameActions = require('../actions/Game.actions');
 var Component = React.createClass({
 
   getInitialState: function() {
-    return { inputTurn: "" };
+    return {
+      inputTurn: "",
+    }
   },
 
   onChangeColorSet: function(event, value) {
@@ -21,16 +23,9 @@ var Component = React.createClass({
     this.setState({inputTurn: value})
   },
 
-
   onClickSubmitTurn: function(event, value) {
     GameActions.sendTurn({turn: this.state.inputTurn})
     this.setState({inputTurn: ""})
-  },
-
-  getInitialState: function() {
-    return {
-      inputTurn: "",
-    }
   },
 
   render: function() {

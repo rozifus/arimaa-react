@@ -61,7 +61,8 @@ GameStore.DespatchToken = GameDispatcher.register(function(payload) {
 
     case ActionTypes.MAKE_TURN:
       var turn = action.turn;
-      _engine && _engine.processTurn(turn);
+      _board = _engine && _engine.processTurn(turn);
+      GameStore.emitChange();
       break;
   };
 

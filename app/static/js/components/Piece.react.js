@@ -28,7 +28,7 @@ var Piece = React.createClass({
   },
 
   componentWillUnmount: function() {
-    Themestore.removeChangeListener(this._onChange);
+    ThemeStore.removeChangeListener(this._onChange);
   },
 
   render: function() {

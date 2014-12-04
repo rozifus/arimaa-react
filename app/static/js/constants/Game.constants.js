@@ -20,11 +20,12 @@ var ActionTypes = keyMirror({
 
 });
 
+
 var GameState = keyMirror({
   NONE: null,
   SETUP: null,
   MAIN: null,
-})
+});
 
 module.exports = {
 

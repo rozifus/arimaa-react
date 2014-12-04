@@ -79,6 +79,8 @@ Object.keys(Animals).map(function(animal) {
 
 var PieceTypes = keyMirror(PieceTypeData);
 
+var NULL_PIECE = " ";
+
 var ActionTypes = keyMirror({
   SET_COLORSET: null,
 });
@@ -96,6 +98,7 @@ module.exports = {
     Players: Players,
     PieceTypeData: PieceTypeData,
     PieceTypes: PieceTypes,
+    NULL_PIECE: NULL_PIECE,
 
 };
 
