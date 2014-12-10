@@ -20,7 +20,9 @@ var Piece = React.createClass({
   },
 
   getInitialState: function() {
-    return this.getStateFromStores();
+    return {
+      img_src: this.getPieceImgSrc(this.props.pieceCode)
+    }
   },
 
   componentDidMount: function() {
@@ -29,6 +31,12 @@ var Piece = React.createClass({
 
   componentWillUnmount: function() {
     ThemeStore.removeChangeListener(this._onChange);
+  },
+
+  componentWillReceiveProps: function(nextProps) {
+    this.setState({
+      img_src: this.getPieceImgSrc(nextProps.pieceCode)
+    });
   },
 
   render: function() {
@@ -42,12 +50,9 @@ var Piece = React.createClass({
     this.setState(this.getStateFromStores());
   },
 
-  getStateFromStores: function() {
-    return {
-      img_src: ThemeStore.getPieceImgSrc( this.props.pieceCode )
-    };
+  getPieceImgSrc: function(pieceCode) {
+    return ThemeStore.getPieceImgSrc(pieceCode);
   },
-
 
 });
 

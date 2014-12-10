@@ -41,6 +41,7 @@ var Square = React.createClass({
   },
 
   _onChange: function() {
+    console.log("change:", this.getStateFromStores());
     this.setState(this.getStateFromStores());
   },
 
