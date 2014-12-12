@@ -4,6 +4,7 @@ var assign         = require('object-assign');
 var EventEmitter   = require('events').EventEmitter;
 var GameDispatcher = require('../dispatcher/Game.dispatcher');
 var GameConstants  = require('../constants/Game.constants');
+var BoardConstants = require('../constants/Board.constants');
 
 var LocalEngine    = require('../engine/Local.engine');
 
@@ -11,6 +12,8 @@ var ActionTypes    = GameConstants.ActionTypes;
 var CHANGE_EVENT   = 'change';
 
 var BoardData      = require('../data/Board.data');
+
+var Movement       = BoardConstants.Movement;
 
 var _engine = null;
 var _board = [];
@@ -29,18 +32,18 @@ var GameStore = assign({}, EventEmitter.prototype, {
     this.removeListener(CHANGE_EVENT, callback)
   },
 
-  getTurns: function() {
-    return _turns;
-  },
-
   getPieceAt: function(row, column) {
-    return (_board && _board[row] && _board[row][column]) || " ";
+    var board = _engine && _engine.getBoard()
+    return (board && board[row] && board[row][column]) || " ";
   },
 
   getPieceTypeData: function(pieceType) {
     return ThemeConstants.pieceTypeData[pieceType];
   },
 
+  getValidMoves: function(row, column) {
+    return _engine && _engine.getValidMoves(row, column) || [];
+  }
 
 });
 
@@ -55,13 +58,12 @@ GameStore.DespatchToken = GameDispatcher.register(function(payload) {
     case ActionTypes.NEW_GAME:
       _engine = LocalEngine;
       _engine.newGame();
-      _board = _engine.getBoard();
       GameStore.emitChange();
       break;
 
     case ActionTypes.MAKE_TURN:
       var turn = action.turn;
-      _board = _engine && _engine.processTurn(turn);
+      _engine.processTurn(turn);
       GameStore.emitChange();
       break;
   };
