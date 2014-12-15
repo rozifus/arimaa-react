@@ -15,5 +15,13 @@ module.exports = {
     });
   },
 
+  mouseClickSquare: function(row, column) {
+    InterfaceDispatcher.handleViewAction({
+      type: ActionTypes.MOUSE_CLICK_SQUARE,
+      row: row,
+      column: column,
+    });
+  },
+
 };
 

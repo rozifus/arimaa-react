@@ -15,17 +15,23 @@ var CHANGE_EVENT   = 'change';
 
 var BoardData      = require('../data/Board.data');
 
-var Movement       = BoardConstants.Movement;
+var Movements      = BoardConstants.Movements;
 
 var Arrows         = InterfaceConstants.Arrows;
 var ArrowData      = InterfaceConstants.ArrowData;
+
+var ArrowColorData = InterfaceConstants.ArrowColorData;
+var ArrowColors    = InterfaceConstants.ArrowColors;
+
+var getArrowForMovement = InterfaceConstants.getArrowForMovement;
 
 var ARROW_BASE     = InterfaceConstants.ARROW_BASE;
 var ARROW_EXT      = InterfaceConstants.ARROW_EXT;
 
 
-var _selected = null;
-var _arrows = [];
+var _origin = null;
+var _destination = null;
+var _moves = [];
 
 var InterfaceStore = assign({}, EventEmitter.prototype, {
 
@@ -43,12 +49,71 @@ var InterfaceStore = assign({}, EventEmitter.prototype, {
 
   getOverlayImgAt: function(row, column) {
     var img = "";
-    _arrows.map(function(item){
+    if (_destination != null) {
+      var arrow = getArrowForMovement(_destination.movement);
+      if (row == _destination.row && column == _destination.column) {
+        img = ARROW_BASE + ArrowColorData[ArrowColors.BLUE].path +
+              ArrowData[arrow].path + ARROW_EXT;
+      }
+    } else {
+      _moves.map(function(item){
         if (item.row == row && item.column == column) {
-          img = ARROW_BASE + ArrowData[item.arrow].path + ARROW_EXT;
+          var arrow = getArrowForMovement(item.movement);
+          img = ARROW_BASE + ArrowColorData[ArrowColors.GREY].path +
+                ArrowData[arrow].path + ARROW_EXT;
+        }
+      });
+    };
+    return img;
+  },
+
+  setSquareToOrigin: function(row, column) {
+    _moves = [];
+    _origin = {row: row, column: column}
+    _destination = null;
+    var validMoves = GameStore.getValidMoves(row, column)
+    validMoves.map(function(vm){
+      Object.keys(Movements).forEach(function(key) {
+        if (Movements[key] == vm.movement) {
+          _moves.push({movement: key, row: vm.row, column: vm.column});
+        }
+      })
+    });
+  },
+
+  setSquareToDestination: function(row, column) {
+    _moves.map(function(move) {
+        if (move.row == row && move.column == column) {
+          _destination = move;
         }
     });
-    return img;
+  },
+
+  onMouseEnterSquare: function(row, column) {
+    var t = this;
+    var didDestination = false;
+    _moves.map(function(move) {
+      if (move.row == row && move.column == column) {
+        t.setSquareToDestination(row, column);
+        didDestination = true;
+      }
+    });
+    if (!didDestination) {
+        t.setSquareToOrigin(row, column);
+    }
+  },
+
+  onMouseClickSquare: function(row, column) {
+    if (_destination &&
+        _destination.row == row &&
+        _destination.column == column) {
+      var turn = {
+        movement: _destination.movement,
+        row: _origin.row,
+        column: _origin.column,
+      };
+      GameStore.receiveTurn(turn);
+    }
   }
 
 });
@@ -59,19 +124,13 @@ InterfaceStore.DespatchToken = InterfaceDispatcher.register(function(payload) {
   switch(action.type) {
 
     case ActionTypes.MOUSE_ENTER_SQUARE:
-      _arrows = [];
-      _selected = {row: action.row, column: action.column}
-      var validMoves = GameStore.getValidMoves(action.row, action.column)
-      validMoves.map(function(move){
-        Object.keys(ArrowData).forEach(function(key) {
-          if (ArrowData[key].movement == move.movement) {
-            _arrows.push({arrow: key, row: move.row, column: move.column});
-          }
-        })
-      });
+      InterfaceStore.onMouseEnterSquare(action.row, action.column);
       InterfaceStore.emitChange();
       break;
 
+    case ActionTypes.MOUSE_CLICK_SQUARE:
+      InterfaceStore.onMouseClickSquare(action.row, action.column);
+      InterfaceStore.emitChange();
   };
 
 });

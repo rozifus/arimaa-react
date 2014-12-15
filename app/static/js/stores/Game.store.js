@@ -43,7 +43,14 @@ var GameStore = assign({}, EventEmitter.prototype, {
 
   getValidMoves: function(row, column) {
     return _engine && _engine.getValidMoves(row, column) || [];
-  }
+  },
+
+  receiveTurn: function(row, column, direction) {
+    _engine.processPure(row, column, direction)
+    console.log("pure")
+    GameStore.emitChange();
+  },
+
 
 });
 

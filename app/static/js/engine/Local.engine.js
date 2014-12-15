@@ -35,6 +35,8 @@ var Move = function(moveObj) {
   var row    = moveObj.row,
       column = moveObj.column;
 
+      console.log("WOOO", moveObj)
+
   switch (moveObj.movement) {
     case Movements.e:
       _board[row][column+1] = _board[row][column];
@@ -91,12 +93,17 @@ var LocalEngine = {
 
   processTurn: function(turnCode) {
     // doing moves instead for the moment
-    Move(Decode(turnCode))
+    Move(Decode(turnCode));
   },
 
   getValidMoves: function(row, column) {
-    return ValidMoves(row, column)
-  }
+    return ValidMoves(row, column);
+  },
+
+  processPure: function(obj) {
+    Move(obj);
+    console.log(obj)
+  },
 
 };
 

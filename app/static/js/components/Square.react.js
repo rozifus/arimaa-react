@@ -36,14 +36,17 @@ var Square = React.createClass({
 
   render: function() {
 
-    console.log(this.state.overlayImg)
+    if (this.state.overlayImg != "") {
+      console.log(this.state.overlayImg);
+    }
 
     var overlay = (this.state.overlayImg != false) ? <Overlay img_src={this.state.overlayImg}/> : null;
     var piece = (this.state.pieceCode != false) ? <Piece pieceCode={this.state.pieceCode}/> : null;
 
     return(
       <div style={style} className="column two wide game-square"
-           onMouseEnter={this._onMouseEnter} >
+           onMouseEnter={this._onMouseEnter}
+           onClick={this._onMouseClick} >
         {overlay}
         {piece}
       </div>
@@ -58,7 +61,12 @@ var Square = React.createClass({
     InterfaceActions.mouseEnterSquare(this.props.row, this.props.column);
   },
 
+  _onMouseClick: function() {
+    InterfaceActions.mouseClickSquare(this.props.row, this.props.column);
+  },
+
   getStateFromStores: function() {
+    //console.log(InterfaceStore.getOverlayImgAt(this.props.row, this.props.column))
     return {
       pieceCode: GameStore.getPieceAt(this.props.row, this.props.column),
       overlayImg: InterfaceStore.getOverlayImgAt(this.props.row, this.props.column)
