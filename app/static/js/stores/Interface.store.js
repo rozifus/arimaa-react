@@ -55,7 +55,8 @@ var InterfaceStore = assign({}, EventEmitter.prototype, {
         img = ARROW_BASE + ArrowColorData[ArrowColors.BLUE].path +
               ArrowData[arrow].path + ARROW_EXT;
       }
-    } else {
+    }
+    if (!img) {
       _moves.map(function(item){
         if (item.row == row && item.column == column) {
           var arrow = getArrowForMovement(item.movement);
@@ -113,6 +114,7 @@ var InterfaceStore = assign({}, EventEmitter.prototype, {
         column: _origin.column,
       };
       GameStore.receiveTurn(turn);
+      this.setSquareToOrigin(row, column)
     }
   }
 
