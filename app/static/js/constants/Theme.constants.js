@@ -3,6 +3,8 @@ var GFX_BASE = '/static/res/gfx/';
 
 var keyMirror = require('keymirror');
 
+var AnimalConstants = require('./Animal.constants');
+
 var ColorSetData = {
   GOLD_SILVER: {
     name: 'Gold/Silver',
@@ -51,7 +53,7 @@ var AnimalData = {
   }
 };
 
-var Animals = keyMirror(AnimalData);
+var AnimalKeys = keyMirror(AnimalData);
 
 var PlayerData = {
   ONE: {
@@ -66,12 +68,12 @@ var Players = keyMirror(PlayerData)
 
 PieceTypeData = {};
 
-Object.keys(Animals).map(function(animal) {
-  PieceTypeData[AnimalData[animal].code.toUpperCase()] = {
+Object.keys(AnimalConstants.Keys).map(function(animal) {
+  PieceTypeData[AnimalConstants.Data[animal].code.toUpperCase()] = {
     animal: animal,
     player: Players.ONE
   };
-  PieceTypeData[AnimalData[animal].code.toLowerCase()] = {
+  PieceTypeData[AnimalConstants.Data[animal].code.toLowerCase()] = {
     animal: animal,
     player: Players.TWO
   };
@@ -90,8 +92,6 @@ module.exports = {
     GFX_BASE: GFX_BASE,
 
     ActionTypes: ActionTypes,
-    AnimalData: AnimalData,
-    Animals: Animals,
     ColorSets: ColorSets,
     ColorSetData: ColorSetData,
     PlayerData: PlayerData,

@@ -6,6 +6,8 @@ var EventEmitter = require('events').EventEmitter;
 var ThemeDispatcher = require('../dispatcher/Theme.dispatcher');
 var ThemeConstants  = require('../constants/Theme.constants');
 
+var AnimalConstants = require('../constants/Animal.constants');
+
 var ColorSets    = ThemeConstants.ColorSets;
 var ColorSetData = ThemeConstants.ColorSetData;
 var ActionTypes  = ThemeConstants.ActionTypes;
@@ -49,7 +51,7 @@ var ThemeStore = assign({}, EventEmitter.prototype, {
     return ThemeConstants.GFX_BASE +
            ThemeConstants.ColorSetData[_colorSet].path +
            ThemeConstants.PlayerData[player].path +
-           ThemeConstants.AnimalData[animal].path +
+           AnimalConstants.Data[animal].path +
            ThemeConstants.ColorSetData[_colorSet].ext;
 
   },
